@@ -37,13 +37,16 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
         /*1.查出所有分类*/
         List<CategoryEntity> categoryEntities = baseMapper.selectList(null);
         /*组装成父子的树形结构*/
-        List<CategoryEntity> level1category = categoryEntities.stream().filter(categoryEntity ->
-                categoryEntity.getParentCid() == 0).map(menu->
-                                {menu.setChildren(getChildren(menu,categoryEntities));
-                return menu;
-                }).sorted((menu1,menu2)->(menu1.getSort()==null?0:menu1.getSort())-(menu2.getSort()==null?0:menu2.getSort())).
-                collect(Collectors.toList());
-        return categoryEntities;
+        List<CategoryEntity> level1category = categoryEntities.stream().filter((categoryEntity) ->{
+             return   categoryEntity.getParentCid() == 0;
+        }).map((menu) -> {
+                    menu.setChildren(getChildren(menu, categoryEntities));
+                    return menu;
+                }
+        ).sorted((menu1, menu2) ->{
+            return (menu1.getSort() == null ? 0 : menu1.getSort()) - (menu2.getSort() == null ? 0 : menu2.getSort());
+        }).collect(Collectors.toList());
+        return level1category;
     }
 
     @Override
@@ -52,16 +55,16 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
         baseMapper.deleteBatchIds(catIds);
     }
 
-    public List<CategoryEntity>  getChildren(CategoryEntity root,List<CategoryEntity> all){
-        List<CategoryEntity> childrenMenus = all.stream().filter(categoryEntity ->
+    public List<CategoryEntity> getChildren(CategoryEntity root, List<CategoryEntity> all) {
+        List<CategoryEntity> childrenMenus = all.stream().filter(categoryEntity ->{
                 /*找子菜单*/
-                categoryEntity.getParentCid() == root.getCatId())
-                .map(categoryEntity -> {categoryEntity.setChildren(getChildren(categoryEntity,all));
-                return categoryEntity;
-                })
-                /*子菜单排序*/
-                .sorted((menu1,menu2)->(menu1.getSort()==null?0:menu1.getSort())-(menu2.getSort()==null?0:menu2.getSort()))
-                .collect(Collectors.toList());
+              return  categoryEntity.getParentCid() == root.getCatId();
+        }).map(categoryEntity -> {
+                    categoryEntity.setChildren(getChildren(categoryEntity, all));
+                    return categoryEntity;
+                }).sorted((menu1, menu2) ->{  /*子菜单排序*/
+                    return (menu1.getSort() == null ? 0 : menu1.getSort()) - (menu2.getSort() == null ? 0 : menu2.getSort());
+                }).collect(Collectors.toList());
         return childrenMenus;
     }
 }
