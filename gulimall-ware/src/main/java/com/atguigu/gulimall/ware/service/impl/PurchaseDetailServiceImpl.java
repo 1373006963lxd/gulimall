@@ -11,6 +11,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -51,4 +52,8 @@ public class PurchaseDetailServiceImpl extends ServiceImpl<PurchaseDetailDao, Pu
         return  purchaseId;
     }
 
+    @Override
+    public void updateBatchDetailEntity(ArrayList<PurchaseDetailEntity> detailEntityArrayList) {
+        this.updateBatchById(detailEntityArrayList);
+    }
 }
