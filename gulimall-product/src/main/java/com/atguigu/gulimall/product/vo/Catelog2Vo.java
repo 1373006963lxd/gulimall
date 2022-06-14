@@ -8,9 +8,9 @@ import java.util.List;
 
 /**
  * @Description:
- * @Created: with IntelliJ IDEA.
- * @author: lixiaodong
- * @createTime: 2022-06-08 14:50
+ *
+ *  lixiaodong
+ *  2022-06-08 14:50
  *
  * 二级分类id
  **/

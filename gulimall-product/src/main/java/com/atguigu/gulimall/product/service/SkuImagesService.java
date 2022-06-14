@@ -19,5 +19,7 @@ public interface SkuImagesService extends IService<SkuImagesEntity> {
     PageUtils queryPage(Map<String, Object> params);
 
     void saveBatchImg(List<SkuImagesEntity> imagesEntities);
+
+    List<SkuImagesEntity> getImagesBySkuId(Long skuId);
 }
 

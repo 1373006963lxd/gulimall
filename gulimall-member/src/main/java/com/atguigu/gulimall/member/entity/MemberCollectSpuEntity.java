@@ -2,17 +2,17 @@ package com.atguigu.gulimall.member.entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Date;
-import lombok.Data;
 
 /**
  * 会员收藏的商品
  * 
- * @author lixiaodong
- * @email lixiaodong@gmail.com
- * @date 2022-05-21 23:11:02
+ * @author 李晓东
+ * @email lixiaodong@gulimall.com
+ * @date 2020-05-22 19:42:06
  */
 @Data
 @TableName("ums_member_collect_spu")

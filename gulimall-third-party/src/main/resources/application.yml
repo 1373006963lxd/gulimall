@@ -10,6 +10,11 @@ spring:
       bucket: gulimall-lxd525
       oss:
         endpoint: oss-cn-beijing.aliyuncs.com
+      sms:
+        host: https://jmsms.market.alicloudapi.com
+        path: /sms/send
+        templateId: M72CB42894
+        appcode: 151a7f689dd8463e8318be9c266d3371
   application:
     name: gulimall-third-party
 server:

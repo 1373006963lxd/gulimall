@@ -1,17 +1,17 @@
 package com.atguigu.gulimall.order.service;
 
-import com.baomidou.mybatisplus.extension.service.IService;
 import com.atguigu.common.utils.PageUtils;
 import com.atguigu.gulimall.order.entity.OrderSettingEntity;
+import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.Map;
 
 /**
  * 订单配置信息
  *
- * @author lixiaodong
- * @email lixiaodong@gmail.com
- * @date 2022-05-21 23:22:15
+ * @author
+ * @email lixiaodong@gulimall.com
+ * @date  19:49:53
  */
 public interface OrderSettingService extends IService<OrderSettingEntity> {
 

@@ -1,28 +1,25 @@
 package com.atguigu.gulimall.order.controller;
 
+import com.atguigu.common.utils.PageUtils;
+import com.atguigu.common.utils.R;
+import com.atguigu.gulimall.order.entity.OrderOperateHistoryEntity;
+import com.atguigu.gulimall.order.service.OrderOperateHistoryService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.Arrays;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
-import com.atguigu.gulimall.order.entity.OrderOperateHistoryEntity;
-import com.atguigu.gulimall.order.service.OrderOperateHistoryService;
-import com.atguigu.common.utils.PageUtils;
-import com.atguigu.common.utils.R;
 
 
 
 /**
  * 订单操作历史记录
  *
- * @author lixiaodong
- * @email lixiaodong@gmail.com
- * @date 2022-05-21 23:22:15
+ * @author
+ * @email lixiaodong@gulimall.com
+ * @date  19:49:53
  */
 @RestController
 @RequestMapping("order/orderoperatehistory")
@@ -34,7 +31,7 @@ public class OrderOperateHistoryController {
      * 列表
      */
     @RequestMapping("/list")
-   // @RequiresPermissions("order:orderoperatehistory:list")
+    //@RequiresPermissions("order:orderoperatehistory:list")
     public R list(@RequestParam Map<String, Object> params){
         PageUtils page = orderOperateHistoryService.queryPage(params);
 
@@ -46,7 +43,7 @@ public class OrderOperateHistoryController {
      * 信息
      */
     @RequestMapping("/info/{id}")
-   // @RequiresPermissions("order:orderoperatehistory:info")
+    //@RequiresPermissions("order:orderoperatehistory:info")
     public R info(@PathVariable("id") Long id){
 		OrderOperateHistoryEntity orderOperateHistory = orderOperateHistoryService.getById(id);
 

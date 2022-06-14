@@ -11,9 +11,9 @@ import lombok.Data;
 /**
  * 订单项信息
  * 
- * @author lixiaodong
- * @email lixiaodong@gmail.com
- * @date 2022-05-21 23:22:15
+ * @author
+ * @email lixiaodong@gulimall.com
+ * @date  19:49:53
  */
 @Data
 @TableName("oms_order_item")

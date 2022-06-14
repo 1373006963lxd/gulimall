@@ -2,8 +2,13 @@ package com.atguigu.gulimall.thirdparty;
 
 import com.aliyun.oss.OSSClient;
 import com.aliyun.oss.OSSException;
+import com.atguigu.common.utils.HttpUtils;
+import com.atguigu.gulimall.thirdparty.component.SmsComponent;
+import org.apache.http.HttpResponse;
+import org.apache.http.util.EntityUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -11,6 +16,8 @@ import javax.annotation.Resource;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -23,6 +30,15 @@ public class GulimallThirdPartyApplicationTests {
 
     @Resource
     OSSClient ossClient;
+
+    @Autowired
+    SmsComponent smsComponent;
+
+
+    @Test
+    public void send(){
+        smsComponent.sendCode("17863819685","123456");
+    }
 
     @Test
     public void upload(){
@@ -55,6 +71,41 @@ public class GulimallThirdPartyApplicationTests {
             if (ossClient != null) {
                 ossClient.shutdown();
             }
+        }
+    }
+
+    @Test
+    public void sendSms() {
+        String host = "https://jmsms.market.alicloudapi.com";
+        String path = "/sms/send";
+        String method = "POST";
+        String appcode = "151a7f689dd8463e8318be9c266d3371";
+        Map<String, String> headers = new HashMap<String, String>();
+        //最后在header中的格式(中间是英文空格)为Authorization:APPCODE 83359fd73fe94948385f570e3c139105
+        headers.put("Authorization", "APPCODE " + appcode);
+        Map<String, String> querys = new HashMap<String, String>();
+        querys.put("mobile", "17863819685");
+        querys.put("templateId", "M72CB42894");
+        querys.put("value", "123456");
+        Map<String, String> bodys = new HashMap<String, String>();
+
+
+        try {
+            /**
+             * 重要提示如下:
+             * HttpUtils请从
+             * https://github.com/aliyun/api-gateway-demo-sign-java/blob/master/src/main/java/com/aliyun/api/gateway/demo/util/HttpUtils.java
+             * 下载
+             *
+             * 相应的依赖请参照
+             * https://github.com/aliyun/api-gateway-demo-sign-java/blob/master/pom.xml
+             */
+            HttpResponse response = HttpUtils.doPost(host, path, method, headers, querys, bodys);
+            System.out.println(response.toString());
+            //获取response的body
+            System.out.println(EntityUtils.toString(response.getEntity()));
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

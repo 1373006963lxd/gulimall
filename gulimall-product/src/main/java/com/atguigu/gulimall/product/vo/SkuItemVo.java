@@ -1,8 +1,9 @@
 package com.atguigu.gulimall.product.vo;
 
-import com.xunqi.gulimall.product.entity.SkuImagesEntity;
-import com.xunqi.gulimall.product.entity.SkuInfoEntity;
-import com.xunqi.gulimall.product.entity.SpuInfoDescEntity;
+
+import com.atguigu.gulimall.product.entity.SkuImagesEntity;
+import com.atguigu.gulimall.product.entity.SkuInfoEntity;
+import com.atguigu.gulimall.product.entity.SpuInfoDescEntity;
 import lombok.Data;
 import lombok.ToString;
 
@@ -10,9 +11,9 @@ import java.util.List;
 
 /**
  * @Description:
- * @Created: with IntelliJ IDEA.
- * @author: lixiaodong
- * @createTime: 2022-06-19 16:46
+ *
+ *  lixiaodong
+ *  2022-06-19 16:46
  **/
 
 

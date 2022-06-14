@@ -1,5 +1,7 @@
 package com.atguigu.gulimall.product.service.impl;
 
+import com.alibaba.fastjson.TypeReference;
+import com.atguigu.common.constant.ProductConstant;
 import com.atguigu.common.to.SkuReductionTo;
 import com.atguigu.common.to.SpuBoundTo;
 import com.atguigu.common.to.es.SkuEsModel;
@@ -10,6 +12,7 @@ import com.atguigu.common.utils.R;
 import com.atguigu.gulimall.product.dao.SpuInfoDao;
 import com.atguigu.gulimall.product.entity.*;
 import com.atguigu.gulimall.product.feign.CouponFeignService;
+import com.atguigu.gulimall.product.feign.SearchFeignService;
 import com.atguigu.gulimall.product.feign.WareFeignService;
 import com.atguigu.gulimall.product.service.*;
 import com.atguigu.gulimall.product.vo.*;
@@ -63,6 +66,9 @@ public class SpuInfoServiceImpl extends ServiceImpl<SpuInfoDao, SpuInfoEntity> i
 
     @Autowired
     WareFeignService wareFeignService;
+
+    @Autowired
+    SearchFeignService searchFeignService;
 
     @Autowired
     CategoryBrandRelationService categoryBrandRelationService;
@@ -239,8 +245,10 @@ public class SpuInfoServiceImpl extends ServiceImpl<SpuInfoDao, SpuInfoEntity> i
         Map<Long, Boolean> stockMap = null;
         try{
             //1.发送远程调用，库存系统查询是否有库存
-            R<List<skuHasStockVo>> skusHasStock = wareFeignService.getSkusHasStock(skuIds);
-            stockMap = skusHasStock.getData().stream().collect(Collectors.toMap(skuHasStockVo::getSkuId, item -> item.getHasStock()));
+            R r = wareFeignService.getSkusHasStock(skuIds);
+            TypeReference<List<skuHasStockVo>> typeReference = new TypeReference<List<skuHasStockVo>>() {
+            };
+            stockMap = r.getData(typeReference).stream().collect(Collectors.toMap(skuHasStockVo::getSkuId, item -> item.getHasStock()));
         }catch (Exception e){
             log.error("库存服务调用出现异常：{ }",e);
         }
@@ -270,6 +278,13 @@ public class SpuInfoServiceImpl extends ServiceImpl<SpuInfoDao, SpuInfoEntity> i
             return skuEsModel;
         }).collect(Collectors.toList());
         //将数据发送给es
+        R r = searchFeignService.productStatusUp(skuEsModels);
+        if(r.getCode()==0){
+            //上架成功修改状态
+            this.baseMapper.updateSpuStatus(spuId, ProductConstant.StatussEnum.SPU_UP.getCode());
+        }else{
+            //远程调用失败  7.重复调用  接口幂等性
+        }
 
 
     }

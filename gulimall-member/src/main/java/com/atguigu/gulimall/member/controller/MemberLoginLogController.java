@@ -20,9 +20,9 @@ import com.atguigu.common.utils.R;
 /**
  * 会员登录记录
  *
- * @author lixiaodong
- * @email lixiaodong@gmail.com
- * @date 2022-05-21 23:11:02
+ * @author 李晓东
+ * @email lixiaodong@gulimall.com
+ * @date 2020-05-22 19:42:06
  */
 @RestController
 @RequestMapping("member/memberloginlog")
@@ -34,7 +34,7 @@ public class MemberLoginLogController {
      * 列表
      */
     @RequestMapping("/list")
-   // @RequiresPermissions("member:memberloginlog:list")
+    //@RequiresPermissions("member:memberloginlog:list")
     public R list(@RequestParam Map<String, Object> params){
         PageUtils page = memberLoginLogService.queryPage(params);
 
@@ -46,7 +46,7 @@ public class MemberLoginLogController {
      * 信息
      */
     @RequestMapping("/info/{id}")
-   // @RequiresPermissions("member:memberloginlog:info")
+    //@RequiresPermissions("member:memberloginlog:info")
     public R info(@PathVariable("id") Long id){
 		MemberLoginLogEntity memberLoginLog = memberLoginLogService.getById(id);
 

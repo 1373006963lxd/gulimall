@@ -1,28 +1,23 @@
 package com.atguigu.gulimall.member.controller;
 
-import java.util.Arrays;
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.atguigu.gulimall.member.entity.MemberCollectSubjectEntity;
-import com.atguigu.gulimall.member.service.MemberCollectSubjectService;
 import com.atguigu.common.utils.PageUtils;
 import com.atguigu.common.utils.R;
+import com.atguigu.gulimall.member.entity.MemberCollectSubjectEntity;
+import com.atguigu.gulimall.member.service.MemberCollectSubjectService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Arrays;
+import java.util.Map;
 
 
 
 /**
  * 会员收藏的专题活动
  *
- * @author lixiaodong
- * @email lixiaodong@gmail.com
- * @date 2022-05-21 23:11:02
+ * @author 李晓东
+ * @email lixiaodong@gulimall.com
+ * @date 2020-05-22 19:42:06
  */
 @RestController
 @RequestMapping("member/membercollectsubject")
@@ -34,7 +29,7 @@ public class MemberCollectSubjectController {
      * 列表
      */
     @RequestMapping("/list")
-   // @RequiresPermissions("member:membercollectsubject:list")
+    //@RequiresPermissions("member:membercollectsubject:list")
     public R list(@RequestParam Map<String, Object> params){
         PageUtils page = memberCollectSubjectService.queryPage(params);
 
@@ -46,7 +41,7 @@ public class MemberCollectSubjectController {
      * 信息
      */
     @RequestMapping("/info/{id}")
-   // @RequiresPermissions("member:membercollectsubject:info")
+    //@RequiresPermissions("member:membercollectsubject:info")
     public R info(@PathVariable("id") Long id){
 		MemberCollectSubjectEntity memberCollectSubject = memberCollectSubjectService.getById(id);
 

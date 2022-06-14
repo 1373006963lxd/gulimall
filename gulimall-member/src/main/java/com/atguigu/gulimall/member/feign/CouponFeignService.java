@@ -1,14 +1,20 @@
 package com.atguigu.gulimall.member.feign;
 
-
 import com.atguigu.common.utils.R;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+/**
+ * @Description:
+ * @Created: with IntelliJ IDEA.
+ * @author: 夏沫止水
+ * @createTime: 2020-05-30 15:23
+ **/
+
 @FeignClient("gulimall-coupon")
 public interface CouponFeignService {
 
-
     @RequestMapping("/coupon/coupon/member/list")
-    public R memberCoupons();
+    public R membercoupons();
+
 }
