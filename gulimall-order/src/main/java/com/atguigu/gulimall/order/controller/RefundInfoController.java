@@ -79,7 +79,6 @@ public class RefundInfoController {
     //@RequiresPermissions("order:refundinfo:delete")
     public R delete(@RequestBody Long[] ids){
 		refundInfoService.removeByIds(Arrays.asList(ids));
-
         return R.ok();
     }
 
