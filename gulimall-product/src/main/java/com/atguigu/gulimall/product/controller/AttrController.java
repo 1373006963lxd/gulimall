@@ -17,7 +17,7 @@ import java.util.Map;
 
 
 /**
- * 商品属性
+ * 商品属性修改github
  *
  * @author lixiaodong
  * @email lixiaodong@gmail.com
