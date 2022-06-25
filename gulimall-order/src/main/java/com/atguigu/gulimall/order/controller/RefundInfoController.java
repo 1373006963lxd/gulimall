@@ -76,7 +76,6 @@ public class RefundInfoController {
      * 删除
      */
     @RequestMapping("/delete")
-    //@RequiresPermissions("order:refundinfo:delete")
     public R delete(@RequestBody Long[] ids){
 		refundInfoService.removeByIds(Arrays.asList(ids));
         return R.ok();
