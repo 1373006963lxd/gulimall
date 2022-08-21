@@ -12,6 +12,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -40,5 +41,24 @@ public class AttrAttrgroupRelationServiceImpl extends ServiceImpl<AttrAttrgroupR
         }).collect(Collectors.toList());
         this.saveBatch(relationEntities);
     }
+
+    public static void main(String[] args){
+            List<String> list = Arrays.asList("aahesh", "Suresh", "aohit");
+        //没有匹配的值.get则会抛异常
+            /*while (true) {
+                String output = list.stream()
+                        .filter(e -> e.startsWith("M"))
+                        .findAny().get();
+                System.out.println(output);
+            }*/
+
+             while (true) {
+                String output = list.stream()
+                        .filter(e -> e.startsWith("M"))
+                        .findAny()
+                        .orElse("null");
+                System.out.println(output);
+            }
+        }
 
 }
